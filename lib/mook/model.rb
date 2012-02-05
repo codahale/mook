@@ -12,11 +12,7 @@ module Mook
   protected
 
     attr_reader :site, :page
-
-    def this
-      @page
-    end
-
+    
     def partial(name)
       partial = ERB.new(File.read(File.join("templates", "_#{name}.erb")))
       partial.result(self.binding)
