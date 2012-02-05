@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require "fileutils"
+require "rubygems"
+require "mook"
+
+puts "> Loading"
+site = Mook::Site.load(FileUtils.pwd)
+puts "> Rendering"
+site.render!
+puts "> Staging"
+site.stage!
+puts "> Done"
