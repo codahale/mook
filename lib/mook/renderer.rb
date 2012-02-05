@@ -4,7 +4,8 @@ module Mook
       :strikethrough => true,
       :fenced_code_blocks => true,
       :space_after_headers => true,
-      :superscript => true
+      :superscript => true,
+      :autolink => true
     }
     HTML_OPTIONS = {
 
