@@ -6,10 +6,8 @@ module Mook
     
     def initialize(opts)
       super(opts)
-      @toc = ""
       @toc_id = 0
-      @toc_last_level = 0
-      @toc_closed = false
+      @toc = []
     end
 
     def block_code(code, language)
@@ -33,30 +31,14 @@ module Mook
       id = if tag then tag else "toc_#{@toc_id}" end
 
       link = "<a href=\"##{id}\">#{text}</a>"
-
-      if @toc_last_level <= 0
-        @toc << "<li>#{link}"
-      else
-        if @toc_last_level == header_level
-          @toc << "</li><li>#{link}"
-        elsif @toc_last_level < header_level
-          @toc << "<ul><li>#{link}"
-        else
-          @toc << "</ul><li>#{link}"
-        end
-      end
-
-      @toc_last_level = header_level
+      
+      @toc << "#{"  " * (header_level - 1)}* #{link}"
 
       "<a name=\"#{id}\"></a><h#{header_level}>#{text}</h#{header_level}>"
     end
 
     def toc
-      unless @toc_closed
-        @toc = "<ul>#{@toc}</li></ul>"
-        @toc_closed = true
-      end
-      @toc
+      @toc.join("\n")
     end
   end
 end

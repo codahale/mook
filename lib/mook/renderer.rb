@@ -20,7 +20,7 @@ module Mook
       md = Redcarpet::Markdown.new(renderer, MARKDOWN_OPTIONS)
 
       page.content = md.render(page.markdown)
-      page.toc = renderer.toc
+      page.toc = md.render(renderer.toc)
 
       template = ERB.new(File.read(File.join("templates", page.template)))
       model = Model.new(@site, page)
